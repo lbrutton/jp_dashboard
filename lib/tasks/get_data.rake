@@ -6,7 +6,7 @@ task :get_data => :environment do
     "token" => "8620634f138131ebdd4a0003b3955d20",
     "filter" => {
     },
-    "group_by" => ["date"],
+    "group_by" => ["campaigns"],
     "order_by" => {
         "impressions" => "desc"
         },
@@ -26,5 +26,10 @@ task :get_data => :environment do
     puts response
     response_body = JSON.parse response.body
     puts response_body
+    body_length = response_body.length
+    for i in (0..body_length-1)
+			Campaign.create(name: response_body['reports'][i]['campaigns']['name'])
+			puts response_body['reports'][i]['campaigns']['name']
+		end
     puts "task finished"
 end
