@@ -3,7 +3,7 @@ desc "get some data from reporting API and add it to the DB"
 task :get_data => :environment do 
 	puts "starting task..."
 	@data = {
-    "token" => "8620634f138131ebdd4a0003b3955d20",
+    "token" => #put token here,
     "filter" => {
     },
     "group_by" => ["campaigns"],
