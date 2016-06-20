@@ -1,6 +1,1 @@
-# Ruby on Rails Tutorial: sample application
-
-This is the sample application for the
-[*Ruby on Rails Tutorial:
-Learn Web Development with Rails*](http://www.railstutorial.org/)
-by [Michael Hartl](http://www.michaelhartl.com/).
+This dashboard will use the reporting API to display data for selected accounts, in Japanese, with all financials calculated using an agreed upon CPC rate.
