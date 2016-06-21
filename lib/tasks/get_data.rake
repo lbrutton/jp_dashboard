@@ -43,7 +43,7 @@ task :get_data => :environment do
     response_body = JSON.parse response.body
     puts response_body
     body_length = response_body.length
-    for i in (1..body_length-2)
+    for i in (0..body_length)
 		Campaign.create(name: response_body['reports'][i]['campaigns']['name'])
 	end
     puts "task finished"
