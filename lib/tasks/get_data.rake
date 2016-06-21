@@ -44,7 +44,14 @@ task :get_data => :environment do
     puts response_body
     body_length = response_body.length
     for i in (0..body_length)
-		Campaign.create(name: response_body['reports'][i]['campaigns']['name'])
+		Campaign.create(name: response_body['reports'][i]['campaigns']['name'],
+		impressions: response_body['reports'][i]['impressions'].to_i,
+		clicks: response_body['reports'][i]['click'].to_i,
+		installs: response_body['reports'][i]['installs'].to_i,
+		cpc: response_body['reports'][i]['cpc'].to_f,
+		spend: response_body['reports'][i]['spend'].to_f,
+		ecpi: response_body['reports'][i]['ecpi'].to_f
+		)
 	end
     puts "task finished"
 end
