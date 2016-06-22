@@ -24,6 +24,9 @@ ActiveRecord::Schema.define(version: 20160621164806) do
     t.float    "spend"
     t.float    "ecpi"
     t.integer  "budget"
+    t.float    "cvr"
+    t.float    "ctr"
+    t.float    "CPM"
   end
 
 end
