@@ -17,6 +17,7 @@ class CampaignsController < ApplicationController
         @end_date = params[:end_date]
         
         def get_data(date_range)
+            Campaign.delete_all
             api_key_data = {
 	        "api_key" => "811c0107d1e9c801edc3aed133be9b0d",
 	        "email" => "bear@8crops.com"
@@ -41,7 +42,7 @@ class CampaignsController < ApplicationController
                 },
               "page" => 1,
             "start_date" => @start_date,
-            "end_date" => @end_date
+            "end_date" => "2016-05-20"
             }.to_json
             #puts data
         	api_uri = URI "http://demandapi.bidstalk.com/advertiser/reports"

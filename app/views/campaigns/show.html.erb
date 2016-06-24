@@ -1,43 +1,52 @@
-<%= form_tag({controller: "campaigns", action: "update"}, method: "post") do %>
-<strong>YY-MM-DD</strong>
-  <%= label_tag(:q, "Start date:") %>
-  <%= text_field_tag(:start_date) %>
-  <%= label_tag(:q, "End date:") %>
-  <%= text_field_tag(:end_date) %>
-  <%= submit_tag("Submit") %>
-<% end %>
-
-<div class="container">
-<table class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Impressions</th>
-        <th>Clicks</th>
-        <th>Installs</th>
-        <th>CPC</th>
-        <th>Spend</th>
-        <th>eCPI</th>
-        <th>Budget</th>
-        <th>CVR</th>
-        <th>CTR</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% Campaign.all.each do |campaign| %>
-      <tr>
-        <td><%= campaign.name %></td>
-        <td><%= campaign.impressions %></td>
-        <td><%= campaign.clicks %></td>
-        <td><%= campaign.installs %></td>
-        <td><%= campaign.cpc %></td>
-        <td><%= campaign.spend %></td>
-        <td><%= campaign.ecpi %></td>
-        <td><%= campaign.budget %></td>
-        <td><%= campaign.cvr %></td>
-        <td><%= campaign.ctr %></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class="main-container">
+  <div class="container">
+    <p>Enter the date in the fields below as "YYYY-MM-DD"</p>
+    <%= form_tag({controller: "campaigns", action: "update"}, method: "post") do %>
+      <%= label_tag(:q, "Start date:") %>
+      <%= text_field_tag :start_date, "", "data-provide" => 'datepicker' %>
+      <%= label_tag(:q, "End date:") %>
+      <%= text_field_tag(:end_date) %>
+      <%= check_box_tag(:campaigns) %>
+      <%= label_tag(:campaigns, "Group by campaigns") %>
+      <%= check_box_tag(:placements) %>
+      <%= label_tag(:placements, "Group by placements") %>
+      <%= submit_tag("Submit", class:"btn btn-secondary") %>
+    <% end %>
+    <%= collection_select("something","something_else","bla","bla","bla") %>
+  </div>
+  
+  <div class="container">
+  <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Impressions</th>
+          <th>Clicks</th>
+          <th>Installs</th>
+          <th>CPC</th>
+          <th>Spend</th>
+          <th>eCPI</th>
+          <th>Budget</th>
+          <th>CVR</th>
+          <th>CTR</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% Campaign.all.each do |campaign| %>
+        <tr>
+          <td><%= campaign.name %></td>
+          <td><%= campaign.impressions %></td>
+          <td><%= campaign.clicks %></td>
+          <td><%= campaign.installs %></td>
+          <td><%= campaign.cpc %></td>
+          <td><%= campaign.spend %></td>
+          <td><%= campaign.ecpi %></td>
+          <td><%= campaign.budget %></td>
+          <td><%= campaign.cvr %></td>
+          <td><%= campaign.ctr %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>

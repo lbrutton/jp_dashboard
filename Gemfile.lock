@@ -42,6 +42,8 @@ GEM
       execjs
     binding_of_caller (0.7.3.pre1)
       debug_inspector (>= 0.0.1)
+    bootstrap-datepicker-rails (1.6.1.1)
+      railties (>= 3.0)
     bootstrap-sass (3.2.0.2)
       sass (~> 3.2)
     builder (3.2.2)
@@ -212,6 +214,7 @@ PLATFORMS
 
 DEPENDENCIES
   autoprefixer-rails
+  bootstrap-datepicker-rails
   bootstrap-sass (~> 3.2.0)
   byebug (= 3.4.0)
   coffee-rails (= 4.1.0)
