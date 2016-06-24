@@ -49,7 +49,6 @@ task :get_data => :environment do
 		impressions: response_body['reports'][i]['impressions'].to_i,
 		clicks: response_body['reports'][i]['clicks'].to_i,
 		installs: response_body['reports'][i]['installs'].to_i,
-		cpc: response_body['reports'][i]['cpc'].to_f,
 		cvr: response_body['reports'][i]['cvr'].to_f,
 		ctr: response_body['reports'][i]['ctr'].to_f
 		)
