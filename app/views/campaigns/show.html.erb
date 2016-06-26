@@ -2,17 +2,14 @@
   <div class="container">
     <p>Enter the date in the fields below as "YYYY-MM-DD"</p>
     <%= form_tag({controller: "campaigns", action: "update"}, method: "post") do %>
-      <%= label_tag(:q, "Start date:") %>
+      <%= label_tag("Start date:") %>
       <%= text_field_tag :start_date, "", "data-provide" => 'datepicker' %>
-      <%= label_tag(:q, "End date:") %>
+      <%= label_tag("End date:") %>
       <%= text_field_tag(:end_date) %>
-      <%= check_box_tag(:campaigns) %>
-      <%= label_tag(:campaigns, "Group by campaigns") %>
-      <%= check_box_tag(:placements) %>
       <%= label_tag(:placements, "Group by placements") %>
-      <%= submit_tag("Submit", class:"btn btn-secondary") %>
+      <%= check_box_tag(:placements) %>
+      <%= submit_tag( "Submit" ) %>
     <% end %>
-    <%= collection_select("something","something_else","bla","bla","bla") %>
   </div>
   
   <div class="container">
