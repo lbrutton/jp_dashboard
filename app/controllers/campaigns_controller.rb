@@ -57,7 +57,7 @@ class CampaignsController < ApplicationController
             #puts data
         	api_uri = URI "http://demandapi.bidstalk.com/advertiser/reports"
         	#puts api_uri
-        	response = Net::HTTP.start(api_uri.host, api_uri.port, :read_timeout => 500) do |http|
+        	response = Net::HTTP.start(api_uri.host, api_uri.port) do |http|
         	  request = Net::HTTP::Post.new(api_uri.request_uri, initheader = {'Content-Type' =>'application/json'})
         	  request.body = data
               puts request

@@ -8,11 +8,12 @@ gem 'jquery-rails', '4.0.3'
 gem 'turbolinks',   '2.3.0'
 gem 'jbuilder',     '2.2.3'
 gem 'sdoc',         '0.4.0', group: :doc
-gem 'rename'
-gem 'jquery-dynatable-rails'
+gem 'rename' # needed this to rename a controller that wasn't needed
+gem 'jquery-dynatable-rails' # not sure why I installed this, can probably be removed
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
-gem 'bootstrap-datepicker-rails'
+gem 'pickadate-rails' # this gem is intended to allow the user to pick a date from a drop-down, but I haven't figured out how
+# to use it yet
 
 group :development, :test do
   gem 'sqlite3',     '1.3.9'
