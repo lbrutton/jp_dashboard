@@ -12,8 +12,7 @@ gem 'rename' # needed this to rename a controller that wasn't needed
 gem 'jquery-dynatable-rails' # not sure why I installed this, can probably be removed
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
-gem 'pickadate-rails' # this gem is intended to allow the user to pick a date from a drop-down, but I haven't figured out how
-# to use it yet
+gem 'jquery-ui-rails'
 
 group :development, :test do
   gem 'sqlite3',     '1.3.9'
