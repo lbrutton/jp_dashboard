@@ -49,7 +49,7 @@ class CampaignsController < ApplicationController
                 "impressions" => "desc"#could add an option to let the user change this
                 },
               "page" => 1,
-              "per_page" => 10,#currently set to 10 pages, because the API is too slow to handle much more. Need to 
+              "per_page" => 5,#currently set to 5 pages, because the API is too slow to handle much more. Need to 
               #add an option to let the user select the number of pages at his risk
             "start_date" => @start_date,
             "end_date" => @end_date
@@ -57,7 +57,7 @@ class CampaignsController < ApplicationController
             #puts data
         	api_uri = URI "http://demandapi.bidstalk.com/advertiser/reports"
         	#puts api_uri
-        	response = Net::HTTP.start(api_uri.host, api_uri.port) do |http|
+        	response = Net::HTTP.start(api_uri.host, api_uri.port, :read_timeout => 500) do |http|
         	  request = Net::HTTP::Post.new(api_uri.request_uri, initheader = {'Content-Type' =>'application/json'})
         	  request.body = data
               puts request
