@@ -1,4 +1,4 @@
-require 'rake'
+require 'rake' # not required anymore
 require 'net/http'
 class CampaignsController < ApplicationController
 
