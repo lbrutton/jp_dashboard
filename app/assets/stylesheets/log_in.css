@@ -1,0 +1,61 @@
+body{
+  background-color:#efefef !important
+}
+img{
+  width:100%
+}
+.jp_navbar{
+  border-bottom:1px solid;
+  background-color:#ffffff;
+  border-color:#ff5909;
+  min-height:55px
+}
+.jp_logo_link{
+  padding:10px 10px 10px 0;
+  float:left  
+}
+.jp_sign_out{
+  float:right;
+  padding:7px;
+  margin:10px
+}
+a.jp_out_link{
+  color:#ffffff
+}
+.jp_main_container{
+  width:100%;
+  float:left;
+  margin-top:20px;
+  padding-left:15px;
+  padding-right:15px
+}
+.bx-viewport{
+  -moz-box-shadow:0 0 5px #ccc;
+  -webkit-box-shadow:0 0 5px #ccc;
+  box-shadow:0 0 5px #ccc;
+  border:solid #fff 5px;
+  left:-5px;
+  background:#fff
+}
+.jp_login_form{
+  float:right
+}
+.jp_login_title{
+  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif
+}
+.signInColor{
+  background-color:#ff5909 !important;
+  border-color:#ff5909 !important
+}
+.jp_table_container{
+  margin-bottom:10px
+}
+.footer{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:60px;
+  text-align:center;
+  background-color:#f5f5f5;
+  border-top:1px solid #e2e2e2
+}
