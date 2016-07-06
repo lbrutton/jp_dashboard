@@ -5,7 +5,8 @@ class CampaignsController < ApplicationController
 
   def show
     Campaign.all.each do |campaign|
-      campaign.cpc = 0.2 #this is hard coded for now - need to allow this value to be changed from the admin
+      campaign.cpc = 0.2 
+      #this is hard coded for now - need to allow this value to be changed from the admin
       campaign.spend = (campaign.clicks * 0.2).round(2)
       campaign.ecpi = ((campaign.clicks * 0.2)/campaign.installs).round(2)
       campaign.save
@@ -19,9 +20,11 @@ class CampaignsController < ApplicationController
     end    
 
     @start_date = params[:start_date]
-    @end_date = params[:end_date] #getting the start date from the params in the form on the show page. Need validations here,
+    @end_date = params[:end_date] 
+    #getting the start date from the params in the form on the show page. Need validations here,
     # maybe using activemodel?
-    if params[:placements] == "1" #if the "placements" checkbox is checked, group the API call by 'apps'
+    if params[:placements] == "1" 
+    #if the "placements" checkbox is checked, group the API call by 'apps'
       @group_by = "apps"
     else
       @group_by = "campaigns"
@@ -30,10 +33,7 @@ class CampaignsController < ApplicationController
     def get_data(date_range,group_by)
       Campaign.delete_all #wipe the db clean before refilling it
       api_key_data = {
-        # "api_key" => "811c0107d1e9c801edc3aed133be9b0d", # all of this info is currently hardcoded - needs to be dependant on 
         "api_key" => @user_api_key,
-        # the user who's logged in
-        # "email" => "bear@8crops.com"
         "email" => @user_email
       }.to_json
       api_uri = URI "http://demandapi.bidstalk.com/advertiser/auth"
@@ -105,9 +105,15 @@ class CampaignsController < ApplicationController
       end
     end
     
-    get_data(@date_range,@group_by) # run the get_data function using the date range and group by selection decided by the user
+    get_data(@date_range,@group_by) 
+    # run the get_data function using the date range and group by selection decided by the user
     
-    redirect_to action: "show" # redirect to the show action, so it can calculate the financials based on the set CPC rate etc
+    redirect_to action: "show" 
+    # redirect to the show action, so it can calculate the financials based on the set CPC rate etc
       
+  end
+
+  def destroy
+    Campaign.delete_all
   end
 end
