@@ -31,6 +31,7 @@
         </tr>
       </thead>
       <tbody>
+        <strong><%= flash[:error] %></strong>
         <% Campaign.all.each do |campaign| %>
           <tr>
             <td><%= campaign.name %></td>

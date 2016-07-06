@@ -74,30 +74,34 @@ class CampaignsController < ApplicationController
       # some hardcodecd values, to get the the data from the api and put it in the response_body variable
       puts response_body # useful for debugging - check the terminal where the server is running to see what's coming 
       #through
-      body_length = response_body['reports'].length #response_body['reports'] is exactly the same as per_page
-      if @group_by == "apps" # could be a much better way of doing this - currently checking the value of group_by,
-        # and parsing the data accordingly
-        for i in (0..body_length-1)
-      		Campaign.create(
-            name: response_body['reports'][i]['apps']['name'],
-        		impressions: response_body['reports'][i]['impressions'].to_i,
-        		clicks: response_body['reports'][i]['clicks'].to_i,
-        		installs: response_body['reports'][i]['installs'].to_i,
-        		cvr: response_body['reports'][i]['cvr'].to_f,
-        		ctr: response_body['reports'][i]['ctr'].to_f
-    		  )
-        end
+      if response_body['messages'] == ["no records found to generate reports."]
+        flash[:error] = "No data for this date range"
       else
-        for i in (0..body_length-1)
-      		Campaign.create(
-            name: response_body['reports'][i]['campaigns']['name'],
-        		impressions: response_body['reports'][i]['impressions'].to_i,
-        		clicks: response_body['reports'][i]['clicks'].to_i,
-        		installs: response_body['reports'][i]['installs'].to_i,
-        		cvr: response_body['reports'][i]['cvr'].to_f,
-        		ctr: response_body['reports'][i]['ctr'].to_f
-      		)
-    	    end
+        body_length = response_body['reports'].length #response_body['reports'] is exactly the same as per_page
+        if @group_by == "apps" # could be a much better way of doing this - currently checking the value of group_by,
+          # and parsing the data accordingly
+          for i in (0..body_length-1)
+        		Campaign.create(
+              name: response_body['reports'][i]['apps']['name'],
+          		impressions: response_body['reports'][i]['impressions'].to_i,
+          		clicks: response_body['reports'][i]['clicks'].to_i,
+          		installs: response_body['reports'][i]['installs'].to_i,
+          		cvr: response_body['reports'][i]['cvr'].to_f,
+          		ctr: response_body['reports'][i]['ctr'].to_f
+      		  )
+          end
+        else
+          for i in (0..body_length-1)
+        		Campaign.create(
+              name: response_body['reports'][i]['campaigns']['name'],
+          		impressions: response_body['reports'][i]['impressions'].to_i,
+          		clicks: response_body['reports'][i]['clicks'].to_i,
+          		installs: response_body['reports'][i]['installs'].to_i,
+          		cvr: response_body['reports'][i]['cvr'].to_f,
+          		ctr: response_body['reports'][i]['ctr'].to_f
+        		)
+      	    end
+      	  end
       end
     end
     
