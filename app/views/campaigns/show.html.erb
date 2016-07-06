@@ -1,7 +1,15 @@
-<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+<div class="jp_navbar">
+  <a href="http://dsp.applift.com/" class="jp_logo_link">
+    <img src="https://adv-dsplogo.s3.amazonaws.com/dsp_1459363534_513530713_DataLiftGreyWeb.png" style="width:150px;height:35px">
+  </a>
+  <div class="jp_sign_out signInColor">
+    <%= link_to "Sign out", destroy_user_session_path, :method => :delete, class: 'jp_out_link' %>
+  </div>
+</div>
+
 
 <div class="main-container">
-  <div class="container">
+  <div class="container jp_table_container">
     <p>Select the dates for your report</p>
     <%= form_tag({controller: "campaigns", action: "update"}, method: "post") do %>
       <%= label_tag("Start date:") %>
@@ -15,7 +23,7 @@
   </div>
   
   <div class="container">
-    <table class="table">
+    <table class="table table-striped table-bordered dataTable">
       <thead>
         <tr>
           <th>Name</th>
@@ -48,4 +56,15 @@
       </tbody>
     </table>
   </div>
+</div>
+
+<div class="footer">
+  <h6>
+    <p>
+      <a href="http://www.applift.com/privacy-policy.html" target="_blank">Privacy Policy</a>
+      |
+      <a href="http://www.applift.com/terms-and-conditions.html" target="_blank">Terms &amp; Conditions</a>
+    </p>
+    All Rights Reserved © 2016 AppLift
+  </h6>
 </div>
