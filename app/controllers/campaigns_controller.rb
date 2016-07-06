@@ -1,6 +1,8 @@
 require 'net/http'
 class CampaignsController < ApplicationController
 
+  before_action :authenticate_any!
+
   def show
     Campaign.all.each do |campaign|
       campaign.cpc = 0.2 #this is hard coded for now - need to allow this value to be changed from the admin
@@ -11,6 +13,11 @@ class CampaignsController < ApplicationController
   end
     
   def update
+    if user_signed_in?
+      @user_email = current_user.email
+      @user_api_key = current_user.api_key
+    end    
+
     @start_date = params[:start_date]
     @end_date = params[:end_date] #getting the start date from the params in the form on the show page. Need validations here,
     # maybe using activemodel?
@@ -23,9 +30,11 @@ class CampaignsController < ApplicationController
     def get_data(date_range,group_by)
       Campaign.delete_all #wipe the db clean before refilling it
       api_key_data = {
-        "api_key" => "811c0107d1e9c801edc3aed133be9b0d", # all of this info is currently hardcoded - needs to be dependant on 
+        # "api_key" => "811c0107d1e9c801edc3aed133be9b0d", # all of this info is currently hardcoded - needs to be dependant on 
+        "api_key" => @user_api_key,
         # the user who's logged in
-        "email" => "bear@8crops.com"
+        # "email" => "bear@8crops.com"
+        "email" => @user_email
       }.to_json
       api_uri = URI "http://demandapi.bidstalk.com/advertiser/auth"
     	response = Net::HTTP.start(api_uri.host, api_uri.port) do |http|
