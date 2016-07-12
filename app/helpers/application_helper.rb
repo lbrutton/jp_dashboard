@@ -11,7 +11,7 @@ module ApplicationHelper
   
   def ecpi(installs,spend)
     if installs == 0
-      ecpi = "N/A"
+      ecpi = "n/a"
     else
       ecpi = (spend/installs).round(2)
     end
