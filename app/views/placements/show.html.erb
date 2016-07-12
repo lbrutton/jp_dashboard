@@ -9,11 +9,12 @@
 
 
 <div class="main-container">
+  
   <div class="container jp_table_container">
   <p><%= link_to "Placements", :controller => :placements, :action => :show %></p>
   <p><%= link_to "Campaigns", root_url %></p>
     <p>Select the dates for your report</p>
-    <%= form_tag({controller: "campaigns", action: "show"}, method: "post") do %>
+    <%= form_tag({controller: "placements", action: "show"}, method: "post") do %>
       <%= label_tag("Start date:") %>
       <%= text_field_tag(:start_date) %>
       <%= label_tag("End date:") %>
@@ -40,9 +41,9 @@
       </thead>
       <tbody>
        <strong><%= flash[:error] %></strong>
-        <% a = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).sum(:impressions) %>
-        <% b = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).sum(:clicks) %>
-        <% c = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).sum(:installs) %>
+        <% a = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).sum(:impressions) %>
+        <% b = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).sum(:clicks) %>
+        <% c = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).sum(:installs) %>
         <% d = a.zip(b).zip(c) %>
         <% d.each do |campaign| %>
         

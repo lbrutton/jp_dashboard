@@ -1,7 +1,7 @@
-class CampaignsController < ApplicationController
-
+class PlacementsController < ApplicationController
+  
   before_action :authenticate_any!
-
+  
   def show
     
     if params[:start_date] != nil
@@ -17,5 +17,5 @@ class CampaignsController < ApplicationController
     end
     
   end
-
+  
 end

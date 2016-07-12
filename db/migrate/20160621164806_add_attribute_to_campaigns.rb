@@ -11,6 +11,8 @@ class AddAttributeToCampaigns < ActiveRecord::Migration
     add_column :campaigns, :cvr, :float
     add_column :campaigns, :ctr, :float
     add_column :campaigns, :CPM, :float
+    add_column :campaigns, :day, :date
+    add_column :campaigns, :user_id, :integer
     
   end
 end
