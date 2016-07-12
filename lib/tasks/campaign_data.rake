@@ -53,7 +53,7 @@ task :campaign_data, [:date] => :environment do |t,date|
         flash[:error] = "No data for this date range"
       else
         body_length = response_body['reports'].length #response_body['reports'] is exactly the same as per_page
-        date2 = DateTime.parse(@date) 
+        date2 = Date.parse(@date) 
         puts date2#this is kind of a lash-up to get the system to properly find the records by date - will fix later
         Campaign.where(user_id: user.id, day:date2).delete_all
           for i in (0..body_length-1)
