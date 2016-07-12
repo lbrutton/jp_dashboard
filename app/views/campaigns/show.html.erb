@@ -5,13 +5,17 @@
   <div class="jp_sign_out signInColor">
     <%= link_to "Sign out", destroy_user_session_path, :method => :delete, class: 'jp_out_link' %>
   </div>
+  <div class="jp_sign_out signInColor">
+    <%= link_to "Placements", {:controller => :placements, :action => :show}, class: 'jp_out_link' %>
+  </div>
+  <div class="jp_sign_out signInColor">
+    <%= link_to "Campaigns", root_url, class: 'jp_out_link' %>
+  </div>
 </div>
 
 
 <div class="main-container">
   <div class="container jp_table_container">
-  <p><%= link_to "Placements", :controller => :placements, :action => :show %></p>
-  <p><%= link_to "Campaigns", root_url %></p>
     <p>Select the dates for your report</p>
     <%= form_tag({controller: "campaigns", action: "show"}, method: "post") do %>
       <%= label_tag("Start date:") %>
@@ -40,7 +44,7 @@
       </thead>
       <tbody>
        <strong><%= flash[:error] %></strong>
-        <% a = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).sum(:impressions) %>
+        <% a = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).order(impressions: :desc).sum(:impressions) %>
         <% b = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).sum(:clicks) %>
         <% c = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).sum(:installs) %>
         <% d = a.zip(b).zip(c) %>
