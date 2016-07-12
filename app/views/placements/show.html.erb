@@ -44,9 +44,9 @@
       </thead>
       <tbody>
        <strong><%= flash[:error] %></strong>
-        <% a = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).select(:name, :impressions, :clicks, :installs).group(:name).order(impressions: :desc).sum(:impressions) %>
-        <% b = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).select(:name, :impressions, :clicks, :installs).group(:name).sum(:clicks) %>
-        <% c = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).select(:name, :impressions, :clicks, :installs).group(:name).sum(:installs) %>
+        <% a = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).sum(:impressions) %>
+        <% b = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).sum(:clicks) %>
+        <% c = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).sum(:installs) %>
         <% d = a.zip(b).zip(c) %>
         <% d.each do |campaign| %>
         
