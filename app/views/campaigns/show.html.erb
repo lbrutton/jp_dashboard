@@ -58,6 +58,9 @@
             <td><%= 0.2 %></td>
             <td><%= (campaign[0][1][1]*0.2).round(2) %></td>
             <td><%= ((campaign[0][1][1]*0.2)/campaign[1][1]).round(2) %></td>
+            <td> BUDGET </td>
+            <td> <%= cvr(campaign[1][1].to_f,campaign[0][1][1].to_f) %>% </td>
+            <td> <%= cvr(campaign[0][1][1].to_f,campaign[0][0][1].to_f) %>% </td>
           </tr>
         <% end %>
       </tbody>
