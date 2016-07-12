@@ -9,6 +9,13 @@ class CampaignsController < ApplicationController
       @end_date = Date.parse(params[:end_date])
     end
     
+    @campaigns = Campaign.where(user_id: current_user.id)
+    
+    respond_to do |format|
+      format.html
+      format.csv { render text: @campaigns.to_csv}
+    end
+    
   end
 
 end

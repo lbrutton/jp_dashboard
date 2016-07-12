@@ -44,12 +44,12 @@
       </thead>
       <tbody>
        <strong><%= flash[:error] %></strong>
+
         <% a = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).sum(:impressions) %>
         <% b = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).group(:name).sum(:clicks) %>
         <% c = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).sum(:installs) %>
         <% d = a.zip(b).zip(c) %>
         <% d.each do |campaign| %>
-        
           <tr>
             <td><%= campaign[0][0][0] %></td>
             <td><%= campaign[0][0][1] %></td>
@@ -65,6 +65,9 @@
         <% end %>
       </tbody>
     </table>
+    <p>
+    <%= link_to "Download CSV", root_url(format: "csv") %>
+    </p>
   </div>
 </div>
 
