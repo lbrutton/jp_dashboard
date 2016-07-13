@@ -9,11 +9,11 @@ class PlacementsController < ApplicationController
       @end_date = Date.parse(params[:end_date])
     end
     
-    Campaign.all.each do |campaign|
-      campaign.cpc = 0.2 #this is hard coded for now - need to allow this value to be changed from the admin
-      campaign.spend = (campaign.clicks * 0.2).round(2)
-      campaign.ecpi = ((campaign.clicks * 0.2)/campaign.installs).round(2)
-      campaign.save
+    @placements = Placement.where(user_id: current_user.id)
+    
+    respond_to do |format|
+      format.html
+      format.csv { render text: @placements.to_csv}
     end
     
   end

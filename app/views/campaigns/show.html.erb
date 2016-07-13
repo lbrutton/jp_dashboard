@@ -44,12 +44,12 @@
       </thead>
       <tbody>
        <strong><%= flash[:error] %></strong>
+
         <% a = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).sum(:impressions) %>
         <% b = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).group(:name).sum(:clicks) %>
         <% c = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).sum(:installs) %>
         <% d = a.zip(b).zip(c) %>
         <% d.each do |campaign| %>
-        
           <tr>
             <td><%= campaign[0][0][0] %></td>
             <td><%= campaign[0][0][1] %></td>
@@ -57,11 +57,17 @@
             <td><%= campaign[1][1]%></td>
             <td><%= 0.2 %></td>
             <td><%= (campaign[0][1][1]*0.2).round(2) %></td>
-            <td><%= ((campaign[0][1][1]*0.2)/campaign[1][1]).round(2) %></td>
+            <td><%= ecpi(campaign[1][1].to_f,(campaign[0][1][1]*0.2).to_f) %></td>
+            <td> BUDGET </td>
+            <td> <%= cvr(campaign[1][1].to_f,campaign[0][1][1].to_f) %>% </td>
+            <td> <%= cvr(campaign[0][1][1].to_f,campaign[0][0][1].to_f) %>% </td>
           </tr>
         <% end %>
       </tbody>
     </table>
+    <p>
+    <%= link_to "Download CSV", root_url(format: "csv") %>
+    </p>
   </div>
 </div>
 
