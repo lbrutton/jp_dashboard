@@ -15,6 +15,7 @@ gem 'autoprefixer-rails'
 gem 'jquery-ui-rails'
 gem 'devise'
 gem 'whenever', require: false
+gem 'jquery-turbolinks'
 
 group :development, :test do
   gem 'sqlite3',     '1.3.9'

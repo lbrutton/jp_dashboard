@@ -19,3 +19,4 @@ class PlacementsController < ApplicationController
   end
   
 end
+
