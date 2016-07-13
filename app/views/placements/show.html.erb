@@ -20,21 +20,20 @@
   </div>
 </div>
 
-
 <div class="main-container">
   <div class="container jp_table_container">
     <p><%= t :select_dates %></p>
     <%= form_tag({controller: "placements", action: "show"}, method: "post") do %>
       <%= label_tag(t('start_date')) %>
-      <%= text_field_tag(:start_date) %>
+      <%= text_field_tag(:start_date, @start_date) %>
       <%= label_tag(t('end_date')) %>
-      <%= text_field_tag(:end_date) %>
+      <%= text_field_tag(:end_date, @end_date) %>
       <%= submit_tag(t('submit')) %>
     <% end %>
   </div>
   
   <div class="container">
-    <table class="table table-striped table-bordered dataTable">
+    <table class="table table-striped table-bordered dataTable sortable">
       <thead>
         <tr>
           <th><%= t :name %></th>
@@ -56,7 +55,6 @@
         <% c = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).sum(:installs) %>
         <% d = a.zip(b).zip(c) %>
         <% d.each do |campaign| %>
-        
           <tr>
             <td><%= campaign[0][0][0] %></td>
             <td><%= campaign[0][0][1] %></td>
@@ -71,6 +69,24 @@
           </tr>
         <% end %>
       </tbody>
+      <tfoot>
+        <tr>
+        <th>Totals:</th>
+        <th><%= Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).sum(:impressions) %></th>
+        <th><%= Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).sum(:clicks) %></th>
+        <th><%= Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).sum(:installs) %></th>
+        <th><%= 0.2 %></th>
+        <th><%= (Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).sum(:clicks)*0.2).round(2) %></th>
+        <% total_spend = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).sum(:clicks)*0.2 %>
+        <% total_installs = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).sum(:installs) %>
+        <% total_clicks = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).sum(:clicks) %>
+        <% total_impressions = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).sum(:impressions) %>
+        <th><%= (total_spend/total_installs).round(2) %></th>
+        <th> BUDGET </th>
+        <th><%= (total_installs.to_f/total_clicks.to_f).round(2) %>%</th>
+        <th><%= (total_clicks.to_f/total_impressions.to_f).round(2) %>%</th>
+        </tr>
+      </tfoot>
     </table>
     <p>
     <%= link_to "Download CSV", :controller => :placements, :action => :show, :format => "csv" %>
