@@ -24,11 +24,11 @@
   <div class="container jp_table_container">
     <p><%= t :select_dates %></p>
     <%= form_tag({controller: "placements", action: "show"}, method: "post") do %>
-      <%= label_tag("Start date:") %>
+      <%= label_tag(t('start_date')) %>
       <%= text_field_tag(:start_date, @start_date) %>
-      <%= label_tag("End date:") %>
+      <%= label_tag(t('end_date')) %>
       <%= text_field_tag(:end_date, @end_date) %>
-      <%= submit_tag( "Submit" ) %>
+      <%= submit_tag(t('submit')) %>
     <% end %>
   </div>
   
