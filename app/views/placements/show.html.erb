@@ -2,27 +2,34 @@
   <a href="http://dsp.applift.com/" class="jp_logo_link">
     <img src="https://adv-dsplogo.s3.amazonaws.com/dsp_1459363534_513530713_DataLiftGreyWeb.png" style="width:150px;height:35px">
   </a>
+
+  <% if I18n.locale == I18n.default_locale %>
+    <%= link_to image_tag("http://pubnative-assets.s3.amazonaws.com/static/widget/img/html_units/jp_dsh/jp_icon.png", class: "jp_flag"), :locale=>'jp'%>
+  <% else %>
+    <%= link_to image_tag("http://pubnative-assets.s3.amazonaws.com/static/widget/img/html_units/jp_dsh/uk_icon.png", class: "jp_flag"), :locale=>'en'%>
+  <%end%>
+
   <div class="jp_sign_out signInColor">
-    <%= link_to "Sign out", destroy_user_session_path, :method => :delete, class: 'jp_out_link' %>
+    <%= link_to t('sign_out'), destroy_user_session_path, :method => :delete, class: 'jp_out_link' %>
   </div>
   <div class="jp_sign_out signInColor">
-    <%= link_to "Placements", {:controller => :placements, :action => :show}, class: 'jp_out_link' %>
+    <%= link_to t('placements'), {:controller => :placements, :action => :show}, class: 'jp_out_link' %>
   </div>
   <div class="jp_sign_out signInColor">
-    <%= link_to "Campaigns", root_url, class: 'jp_out_link' %>
+    <%= link_to t('campaigns'), root_url, class: 'jp_out_link' %>
   </div>
 </div>
 
 
 <div class="main-container">
   <div class="container jp_table_container">
-    <p>Select the dates for your report</p>
+    <p><%= t :select_dates %></p>
     <%= form_tag({controller: "placements", action: "show"}, method: "post") do %>
-      <%= label_tag("Start date:") %>
+      <%= label_tag(t('start_date')) %>
       <%= text_field_tag(:start_date) %>
-      <%= label_tag("End date:") %>
+      <%= label_tag(t('end_date')) %>
       <%= text_field_tag(:end_date) %>
-      <%= submit_tag( "Submit" ) %>
+      <%= submit_tag(t('submit')) %>
     <% end %>
   </div>
   
@@ -30,16 +37,16 @@
     <table class="table table-striped table-bordered dataTable">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Impressions</th>
-          <th>Clicks</th>
-          <th>Installs</th>
-          <th>CPC</th>
-          <th>Spend</th>
-          <th>eCPI</th>
-          <th>Budget</th>
-          <th>CVR</th>
-          <th>CTR</th>
+          <th><%= t :name %></th>
+          <th><%= t :impressions %></th>
+          <th><%= t :clicks %></th>
+          <th><%= t :installs %></th>
+          <th><%= t :cpc %></th>
+          <th><%= t :spend %></th>
+          <th><%= t :ecpi %></th>
+          <th><%= t :budget %></th>
+          <th><%= t :cvr %></th>
+          <th><%= t :ctr %></th>
         </tr>
       </thead>
       <tbody>
@@ -74,9 +81,9 @@
 <div class="footer">
   <h6>
     <p>
-      <a href="http://www.applift.com/privacy-policy.html" target="_blank">Privacy Policy</a>
+      <a href="http://www.applift.com/privacy-policy.html" target="_blank"><%=t :privacy %></a>
       |
-      <a href="http://www.applift.com/terms-and-conditions.html" target="_blank">Terms &amp; Conditions</a>
+      <a href="http://www.applift.com/terms-and-conditions.html" target="_blank"><%=t :tcs %></a>
     </p>
     All Rights Reserved © 2016 AppLift
   </h6>

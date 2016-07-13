@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  scope "(:locale)", locale: /en|jp/ do
+  # scope "(:locale)", locale: /en|jp/ do
+  scope "/:locale" do
     devise_for :users, controllers: { sessions: 'users/sessions' }
     devise_for :admins, controllers: { sessions: 'admins/sessions' }
     post 'campaigns/update'
