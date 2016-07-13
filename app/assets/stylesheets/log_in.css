@@ -14,6 +14,11 @@ img{
   padding:10px 10px 10px 0;
   float:left  
 }
+.jp_flag{
+  width:40px;
+  margin-top:7px;
+  float:right
+}
 .jp_sign_out{
   float:right;
   padding:7px;
