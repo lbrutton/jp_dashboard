@@ -4,9 +4,9 @@
   </a>
 
   <% if I18n.locale == I18n.default_locale %>
-    <%= link_to image_tag("http://pubnative-assets.s3.amazonaws.com/static/widget/img/html_units/jp_dsh/uk_icon.png", class: "jp_flag"), :locale=>'en'%>
+    <%= link_to image_tag("http://pubnative-assets.s3.amazonaws.com/static/widget/img/html_units/jp_dsh/en_fg.png", class: "jp_flag"), :locale=>'en'%>
   <% else %>
-    <%= link_to image_tag("http://pubnative-assets.s3.amazonaws.com/static/widget/img/html_units/jp_dsh/jp_icon.png", class: "jp_flag"), :locale=>'jp'%>
+    <%= link_to image_tag("http://pubnative-assets.s3.amazonaws.com/static/widget/img/html_units/jp_dsh/jp_fg.png", class: "jp_flag"), :locale=>'jp'%>
   <%end%>
 
   <div class="jp_sign_out signInColor">
@@ -36,7 +36,7 @@
     <table class="table table-striped table-bordered dataTable sortable">
       <thead>
         <tr>
-          <th><%= t :name %></th>
+          <th><%= t :name_place %></th>
           <th><%= t :impressions %></th>
           <th><%= t :clicks %></th>
           <th><%= t :installs %></th>
@@ -71,7 +71,7 @@
       </tbody>
       <tfoot>
         <tr>
-        <th>Totals:</th>
+        <th><%= t :totals %>:</th>
         <th><%= Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).sum(:impressions) %></th>
         <th><%= Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).sum(:clicks) %></th>
         <th><%= Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).sum(:installs) %></th>
@@ -89,7 +89,7 @@
       </tfoot>
     </table>
     <p>
-    <%= link_to "Download CSV", :controller => :placements, :action => :show, :format => "csv" %>
+    <%= link_to t('csv_down'), :controller => :placements, :action => :show, :format => "csv" %>
     </p>
   </div>
 </div>
