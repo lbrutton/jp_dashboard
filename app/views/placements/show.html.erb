@@ -1,5 +1,5 @@
 <div class="jp_navbar">
-  <a href="http://dsp.applift.com/" class="jp_logo_link">
+  <a href="#" class="jp_logo_link">
     <img src="https://adv-dsplogo.s3.amazonaws.com/dsp_1459363534_513530713_DataLiftGreyWeb.png" style="width:150px;height:35px">
   </a>
 
@@ -40,9 +40,6 @@
           <th><%= t :impressions %></th>
           <th><%= t :clicks %></th>
           <th><%= t :installs %></th>
-          <th><%= t :cpc %></th>
-          <th><%= t :spend %></th>
-          <th><%= t :ecpi %></th>
           <th><%= t :cvr %></th>
           <th><%= t :ctr %></th>
         </tr>
@@ -59,9 +56,6 @@
             <td><%= campaign[0][0][1] %></td>
             <td><%= campaign[0][1][1]%></td>
             <td><%= campaign[1][1]%></td>
-            <td><%= 0.2 %></td>
-            <td><%= (campaign[0][1][1]*0.2).round(2) %></td>
-            <td><%= ecpi(campaign[1][1].to_f,(campaign[0][1][1]*0.2).to_f) %></td>
             <td> <%= (cvr(campaign[1][1].to_f,campaign[0][1][1].to_f)).round(2) %>% </td>
             <td> <%= (cvr(campaign[0][1][1].to_f,campaign[0][0][1].to_f)).round(2) %>% </td>
           </tr>
@@ -73,13 +67,9 @@
         <th><%= Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).sum(:impressions) %></th>
         <th><%= Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).sum(:clicks) %></th>
         <th><%= Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).sum(:installs) %></th>
-        <th><%= 0.2 %></th>
-        <th><%= (Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).sum(:clicks)*0.2).round(2) %></th>
-        <% total_spend = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).sum(:clicks)*0.2 %>
         <% total_installs = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).sum(:installs) %>
         <% total_clicks = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).sum(:clicks) %>
         <% total_impressions = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).sum(:impressions) %>
-        <th><%= (total_spend/total_installs).round(2) %></th>
         <th><%= (total_installs.to_f/total_clicks.to_f).round(2) %>%</th>
         <th><%= (total_clicks.to_f/total_impressions.to_f).round(2) %>%</th>
         </tr>
