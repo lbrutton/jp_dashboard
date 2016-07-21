@@ -15,9 +15,17 @@ th{
   padding-left:15px;
   padding-right:15px
 }
+.jp_logo_container{
+  float:left;
+  margin-top:10px;
+  width:200px
+}
 .jp_logo_link{
   padding:10px 10px 10px 0;
   float:left  
+}
+.jp_top_logo{
+  width:100%
 }
 .jp_flag{
   width:65px;
@@ -46,11 +54,11 @@ a.jp_out_link{
   box-shadow:0 0 5px #ccc;
   border:solid #fff 5px;
   left:-5px;
-  background:#fff
-}
-.jp_login_form{
-  float:right;
-  padding-right:25px
+  background:#fff;
+  text-align:center;
+  width:25%;
+  margin-left:auto;
+  margin-right:auto
 }
 .jp_login_title{
   font-family:"Helvetica Neue",Helvetica,Arial,sans-serif
@@ -71,9 +79,12 @@ a.jp_out_link{
   background-color:#f5f5f5;
   border-top:1px solid #e2e2e2
 }
-
-.btn{
-  width: 130% !important;
+.btn-block{
+  text-align:center
 }
-
+input.btn.btn-sm.btn-success.btn-block.signInColor{
+  margin-left:auto;
+  margin-right:auto;
+  width:35%
+}
 

@@ -9,12 +9,15 @@ Rails.application.routes.draw do
     post 'placements/show'
     get 'placements/show'
     get 'campaigns/show'
+    get 'admins/test'
 
     # The priority is based upon order of creation: first created -> highest priority.
     # See how all your routes lay out with "rake routes".
   end
   get '/:locale' => 'campaigns#show'
   # You can have the root of your site routed with "root"
+  
   root 'campaigns#show'
+  # root 'admins#show'
 
 end

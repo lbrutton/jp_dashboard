@@ -21,4 +21,12 @@ class ApplicationController < ActionController::Base
       authenticate_user!
     end
   end
+
+  def after_sign_in_path_for(resource)
+    if current_admin
+      admins_test_path
+    else
+      root_path
+    end
+  end
 end
