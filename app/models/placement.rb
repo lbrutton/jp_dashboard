@@ -5,7 +5,7 @@ class Placement < ActiveRecord::Base
     CSV.generate do |csv|
       csv << column_names
       all.as_json.each do |placement|
-        csv << placement.values_at("impressions")
+        csv << placement.values_at(*column_names)
       end
     end
   end
