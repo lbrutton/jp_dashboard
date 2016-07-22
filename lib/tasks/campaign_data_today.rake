@@ -56,7 +56,7 @@ task :campaign_data_today => :environment do
         puts date2#this is kind of a lash-up to get the system to properly find the records by date - will fix later
         Campaign.where(user_id: user.id, day:date2).delete_all
           for i in (0..body_length-1)
-        		campaign = Campaign.create(
+        		campaign = Campaign.new(
               name: response_body['reports'][i]['campaigns']['name'],
               day: date2,
           		impressions: response_body['reports'][i]['impressions'].to_i,
@@ -64,9 +64,14 @@ task :campaign_data_today => :environment do
           		installs: response_body['reports'][i]['installs'].to_i,
           		cvr: response_body['reports'][i]['cvr'].to_f,
           		ctr: response_body['reports'][i]['ctr'].to_f,
-          		user_id: user.id,
-          		cpc: 0.2
+          		user_id: user.id
         		)
+        		if Campaign.find_by(name:response_body['reports'][i]['campaigns']['name'])
+        		  campaign.cpc = Campaign.find_by(name:response_body['reports'][i]['campaigns']['name']).cpc
+        		else
+        		  campaign.cpc = 0.2
+        		end
+        		campaign.save
         		puts campaign.day
       	  end
         end

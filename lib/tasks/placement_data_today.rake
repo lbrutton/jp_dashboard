@@ -25,7 +25,7 @@ task :placement_data_today => :environment do
         "token" => @token,
         "filter" => {
         },
-        "group_by" => ["apps"],# depending on what the user selected in the "placements" check box
+        "group_by" => ["apps","campaigns"],# depending on what the user selected in the "placements" check box
         "order_by" => {
           "impressions" => "desc"#could add an option to let the user change this
         },
@@ -56,7 +56,7 @@ task :placement_data_today => :environment do
         puts date2 #this is kind of a lash-up to get the system to properly find the records by date - will fix later
         Placement.where(user_id: user.id, day: @date).delete_all
           for i in (0..body_length-1)
-        		placement = Placement.create(
+        		placement = Placement.new(
               name: response_body['reports'][i]['apps']['name'],
               day: date2,
           		impressions: response_body['reports'][i]['impressions'].to_i,
@@ -64,9 +64,14 @@ task :placement_data_today => :environment do
           		installs: response_body['reports'][i]['installs'].to_i,
           		cvr: response_body['reports'][i]['cvr'].to_f,
           		ctr: response_body['reports'][i]['ctr'].to_f,
-          		user_id: user.id,
-          		cpc: 0.2
+          		user_id: user.id
         		)
+        		if Campaign.find_by(name:response_body['reports'][i]['campaigns']['name'])
+        		  placement.cpc = Campaign.find_by(name:response_body['reports'][i]['campaigns']['name']).cpc
+        		else
+        		  placement.cpc = 0.2
+        		end
+        		placement.save
         		puts placement.day
       	  end
         end
