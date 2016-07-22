@@ -64,7 +64,8 @@ task :placement_data_today => :environment do
           		installs: response_body['reports'][i]['installs'].to_i,
           		cvr: response_body['reports'][i]['cvr'].to_f,
           		ctr: response_body['reports'][i]['ctr'].to_f,
-          		user_id: user.id
+          		user_id: user.id,
+          		cpc: 0.2
         		)
         		puts placement.day
       	  end
