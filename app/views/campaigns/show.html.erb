@@ -1,7 +1,9 @@
 <div class="jp_navbar">
-  <a href="#" class="jp_logo_link">
-    <img src="https://adv-dsplogo.s3.amazonaws.com/dsp_1459363534_513530713_DataLiftGreyWeb.png" style="width:150px;height:35px">
-  </a>
+  <!-- <a href="http://dsp.applift.com/" class="jp_logo_link"> -->
+  <div class="jp_logo_container">
+    <img class="jp_top_logo" src="http://pubnative-assets.s3.amazonaws.com/static/widget/img/html_units/jp_dsh/datalift_cpc_logo.png">
+  </div>
+  <!-- </a> -->
 
   <% if I18n.locale == I18n.default_locale %>
     <%= link_to image_tag("http://pubnative-assets.s3.amazonaws.com/static/widget/img/html_units/jp_dsh/en_fg.png", class: "jp_flag"), :locale=>'en'%>
@@ -59,7 +61,6 @@
         <% e = a.zip(b).zip(c).zip(d) %>
         <% e.each do |campaign| %>
           <tr>
-            <td><%= campaign %></td>
             <td><%= campaign[0][0][0][0][0] %></td>
             <td><%= campaign[0][0][0][1] %></td>
             <td><%= campaign[0][0][1][1] %></td>
