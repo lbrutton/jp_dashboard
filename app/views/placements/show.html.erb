@@ -45,7 +45,6 @@
           <th><%= t :cpc %></th>
           <th><%= t :spend %></th>
           <th><%= t :ecpi %></th>
-          <th><%= t :budget %></th>
           <th><%= t :cvr %></th>
           <th><%= t :ctr %></th>
         </tr>
@@ -53,10 +52,10 @@
       <tbody>
        <strong><%= flash[:error] %></strong>
 
-        <% a = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name,:id).sum(:impressions) %>
-        <% b = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name,:id).sum(:clicks) %>
-        <% c = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name,:id).sum(:installs) %>
-        <% d = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name,:id) %>
+        <% a = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name,:id).order(impressions: :desc).sum(:impressions) %>
+        <% b = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name,:id).order(impressions: :desc).sum(:clicks) %>
+        <% c = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name,:id).order(impressions: :desc).sum(:installs) %>
+        <% d = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name,:id).order(impressions: :desc) %>
         <% e = a.zip(b).zip(c).zip(d) %>
         <% e.each do |campaign| %>
           <tr>
@@ -67,7 +66,6 @@
             <td><%= campaign[1][:cpc]%></td>
             <td><%= (campaign[1][:cpc]*campaign[0][0][1][1]).round(2)%></td>
             <td><%= ecpi(campaign[0][1][1],(campaign[1][:cpc]*campaign[0][0][1][1]).round(2)) %></td>
-            <td><%= campaign[1][:budget]%></td>
             <td><%= cvr(campaign[0][1][1].to_f,campaign[0][0][1][1].to_f)%>%</td>
             <td><%= cvr(campaign[0][0][1][1].to_f,campaign[0][0][0][1].to_f)%>%</td>
           </tr>
@@ -86,7 +84,6 @@
         <% total_clicks = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).sum(:clicks) %>
         <% total_impressions = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).sum(:impressions) %>
         <th><%= (total_spend/total_installs).round(2) %></th>
-        <th><%= Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).average(:budget) %></th>
         <th><%= (total_installs.to_f/total_clicks.to_f).round(2) %>%</th>
         <th><%= (total_clicks.to_f/total_impressions.to_f).round(2) %>%</th>
         </tr>
