@@ -52,14 +52,14 @@
       <tbody>
        <strong><%= flash[:error] %></strong>
 
-        <% a = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).sum(:impressions) %>
-        <% b = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).sum(:clicks) %>
-        <% c = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).sum(:installs) %>
+        <% a = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name,:id).sum(:impressions) %>
+        <% b = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name,:id).sum(:clicks) %>
+        <% c = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name,:id).sum(:installs) %>
         <% d = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name,:id) %>
         <% e = a.zip(b).zip(c).zip(d) %>
         <% e.each do |campaign| %>
           <tr>
-            <td><%= campaign[0][0][0][0] %></td>
+            <td><%= campaign[0][0][0][0][0] %></td>
             <td><%= campaign[0][0][0][1] %></td>
             <td><%= campaign[0][0][1][1] %></td>
             <td><%= campaign[0][1][1]%></td>

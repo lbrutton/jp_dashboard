@@ -31,7 +31,7 @@ task :placement_data, [:date] => :environment do |t,date|
           "impressions" => "desc"#could add an option to let the user change this
         },
         "page" => 1,
-        "per_page" => 100,#currently set to 10 pages, because the API is too slow to handle much more. Need to 
+        "per_page" => 10,#currently set to 10 pages, because the API is too slow to handle much more. Need to 
         #add an option to let the user select the number of pages at his risk
         "start_date" => @date,
         "end_date" => @date
