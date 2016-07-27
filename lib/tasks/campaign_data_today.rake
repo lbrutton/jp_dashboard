@@ -18,7 +18,7 @@ task :campaign_data_today => :environment do
     	  http.request request
     	end
     	response_body = JSON.parse response.body
-    	#puts response_body
+    	puts response_body
     	@token = response_body["data"]["token"]# all the previous lines use the api key to get the token, which is used
     	# for the api calls below
     	data = {
