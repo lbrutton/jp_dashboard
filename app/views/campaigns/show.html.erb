@@ -57,7 +57,7 @@
         <% a = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).order(impressions: :desc).sum(:impressions) %>
         <% b = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).order(impressions: :desc).sum(:clicks) %>
         <% c = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).order(impressions: :desc).sum(:installs) %>
-        <% d = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).order(impressions: :desc) %>
+        <% d = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name,:id).order(impressions: :desc) %>
         <% e = a.zip(b).zip(c).zip(d) %>
         <% e.each do |campaign| %>
           <tr>
