@@ -19,7 +19,7 @@ task :campaign_data, [:date] => :environment do |t,date|
     	  http.request request
     	end
     	response_body = JSON.parse response.body
-    	#puts response_body
+    	puts response_body
     	@token = response_body["data"]["token"]# all the previous lines use the api key to get the token, which is used
     	# for the api calls below
     	data = {
@@ -78,6 +78,10 @@ task :campaign_data, [:date] => :environment do |t,date|
         end
       end
     for i in (1..User.all.length)
-      get_data(User.find(i))
+      begin
+        get_data(User.find(i))
+      rescue
+        next
+      end
     end
 end

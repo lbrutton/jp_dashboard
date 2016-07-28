@@ -79,6 +79,10 @@ task :placement_data, [:date] => :environment do |t,date|
       end
     
     for i in (1..User.all.length)
-      get_data_placements(User.find(i))
+      begin
+        get_data(User.find(i))
+      rescue
+        next
+      end
     end
 end

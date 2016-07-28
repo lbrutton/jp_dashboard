@@ -35,7 +35,7 @@ task :campaign_data_today => :environment do
         "start_date" => @date,
         "end_date" => @date
       }.to_json
-      #puts data
+      puts data
     	api_uri = URI "http://demandapi.bidstalk.com/advertiser/reports"
     	#puts api_uri
     	response = Net::HTTP.start(api_uri.host, api_uri.port, :read_timeout => 500) do |http|
@@ -77,6 +77,10 @@ task :campaign_data_today => :environment do
         end
       end
     for i in (1..User.all.length)
-      get_data(User.find(i))
+      begin
+        get_data(User.find(i))
+      rescue
+        next
+      end
     end
 end

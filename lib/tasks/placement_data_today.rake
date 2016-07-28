@@ -78,6 +78,10 @@ task :placement_data_today => :environment do
       end
     
     for i in (1..User.all.length)
-      get_data_placements(User.find(i))
+      begin
+        get_data(User.find(i))
+      rescue
+        next
+      end
     end
 end
