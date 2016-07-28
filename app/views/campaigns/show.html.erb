@@ -54,14 +54,15 @@
       <tbody>
        <strong><%= flash[:error] %></strong>
 
-        <% a = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name,:id).order(impressions: :desc).sum(:impressions) %>
-        <% b = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name,:id).order(impressions: :desc).sum(:clicks) %>
-        <% c = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name,:id).order(impressions: :desc).sum(:installs) %>
-        <% d = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name,:id).order(impressions: :desc) %>
+        <% a = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).order(impressions: :desc).sum(:impressions) %>
+        <% b = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).order(impressions: :desc).sum(:clicks) %>
+        <% c = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).order(impressions: :desc).sum(:installs) %>
+        <% d = Campaign.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).order(impressions: :desc) %>
         <% e = a.zip(b).zip(c).zip(d) %>
         <% e.each do |campaign| %>
           <tr>
-            <td><%= campaign[0][0][0][0][0] %></td>
+            <td><%= campaign %></td>
+            <td><%= campaign[0][0][0][0] %></td>
             <td><%= campaign[0][0][0][1] %></td>
             <td><%= campaign[0][0][1][1] %></td>
             <td><%= campaign[0][1][1]%></td>
