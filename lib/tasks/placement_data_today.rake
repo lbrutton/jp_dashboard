@@ -5,6 +5,7 @@ task :placement_data_today => :environment do
 	puts "starting task..."
 	@date = DateTime.now.strftime("%Y-%m-%d").to_s
 	puts @date
+	puts User.all.length
 	def get_data_placements(user)
       api_key_data = {
         "api_key" => user.api_key,
@@ -79,8 +80,10 @@ task :placement_data_today => :environment do
     
     for i in (1..User.all.length)
       begin
-        get_data(User.find(i))
+        puts User.find(i).email
+        get_data_placements(User.find(i))
       rescue
+       puts "motherfucker"
         next
       end
     end

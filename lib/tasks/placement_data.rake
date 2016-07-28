@@ -6,6 +6,7 @@ task :placement_data, [:date] => :environment do |t,date|
 	puts date[:date]
 	@date = date[:date]
 	puts @date
+  puts User.all.length
 	def get_data_placements(user)
       api_key_data = {
         "api_key" => user.api_key,
@@ -80,7 +81,7 @@ task :placement_data, [:date] => :environment do |t,date|
     
     for i in (1..User.all.length)
       begin
-        get_data(User.find(i))
+        get_data_placements(User.find(i))
       rescue
         next
       end

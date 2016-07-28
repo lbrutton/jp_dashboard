@@ -52,14 +52,14 @@
       <tbody>
        <strong><%= flash[:error] %></strong>
 
-        <% a = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name,:id).order(impressions: :desc).sum(:impressions) %>
-        <% b = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name,:id).order(impressions: :desc).sum(:clicks) %>
-        <% c = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name,:id).order(impressions: :desc).sum(:installs) %>
-        <% d = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name,:id).order(impressions: :desc) %>
+        <% a = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).sum(:impressions) %>
+        <% b = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).sum(:clicks) %>
+        <% c = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name).sum(:installs) %>
+        <% d = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).group(:name) %>
         <% e = a.zip(b).zip(c).zip(d) %>
         <% e.each do |campaign| %>
           <tr>
-            <td><%= campaign[0][0][0][0][0] %></td>
+            <td><%= campaign[0][0][0][0] %></td>
             <td><%= campaign[0][0][0][1] %></td>
             <td><%= campaign[0][0][1][1] %></td>
             <td><%= campaign[0][1][1]%></td>
