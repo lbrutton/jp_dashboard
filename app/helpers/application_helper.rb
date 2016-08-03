@@ -6,7 +6,7 @@ module ApplicationHelper
       else
         @cvr = installs/clicks
       end
-      return @cvr.round(2)
+      return @cvr
   end
   
   def ecpi(installs,spend)

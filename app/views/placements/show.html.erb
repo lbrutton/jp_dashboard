@@ -67,8 +67,8 @@
             <td><%= (campaign[1][1]*campaign[0][0][1][1]).round(2)%></td>
             <td><%= ecpi(campaign[0][1][1],(campaign[0][0][1][1]).round(2)) %></td>
             <td></td>
-            <td><%= cvr(campaign[0][1][1].to_f,campaign[0][0][1][1].to_f)%>%</td>
-            <td><%= cvr(campaign[0][0][1][1].to_f,campaign[0][0][0][1].to_f)%>%</td>
+            <td><%= (cvr(campaign[0][1][1].to_f,campaign[0][0][1][1].to_f)*100).round(2) %>%</td>
+            <td><%= (cvr(campaign[0][0][1][1].to_f,campaign[0][0][0][1].to_f)*100).round(2) %>%</td>
           </tr>
         <% end %>
       </tbody>
@@ -85,8 +85,8 @@
         <% total_clicks = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).sum(:clicks) %>
         <% total_impressions = Placement.where(user_id: current_user.id).where("day >= ?", @start_date).where("day <= ?", @end_date).sum(:impressions) %>
         <th><%= (total_spend/total_installs).round(2) %></th>
-        <th><%= (total_installs.to_f/total_clicks.to_f).round(2) %>%</th>
-        <th><%= (total_clicks.to_f/total_impressions.to_f).round(2) %>%</th>
+        <th><%= ((total_installs.to_f/total_clicks.to_f)*100).round(2) %>%</th>
+        <th><%= ((total_clicks.to_f/total_impressions.to_f)*100).round(2) %>%</th>
         </tr>
       </tfoot>
     </table>
